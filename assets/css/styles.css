@@ -3,11 +3,15 @@
 }
 
 .logo {
-    width: 250px;
+    width: 300px;
 }
 
 .container {
     background-color: #05294d;
+}
+
+.dark {
+    background-color: #05294d !important;
 }
 
 .red {
@@ -171,7 +175,7 @@ h3 {
     }
 
     .logo {
-        width: 175px;
+        width: 200px;
     }
 
 }

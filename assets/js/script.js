@@ -78,10 +78,25 @@ var app = new Vue({
 
         },
 
+        annualleave: function () {
+            if (this.yesshift === "Shift Worker") {
+                weeksAnnualLeave = this.year * 5;
+            } else {
+                weeksAnnualLeave = this.year * 4;
+                personalLeave = this.year * 10;
+                longService = this.year * 0.8;
+            }
+            return weeksAnnualLeave
+        },
 
-        calculation: function () {
+        personalleave: function () {
+            personalLeave = this.year * 10;
+            return personalLeave
+        },
 
-
+        longservice: function () {
+            longService = this.year * 0.8;
+            return longService.toFixed(2)
         },
 
 
@@ -105,11 +120,12 @@ var app = new Vue({
                         "address": this.email
                     }],
                     "phone_numbers": [{
-                        "number": this.phone
+                        "number": "+61" + this.phone
                     }],
                     "custom_fields": {
                         "Industry": this.industry,
-
+                        "Union Membership Status": (this.yesunion === "Union Member") ? this.yesunion : this.nounion,
+                        "Shift Worker": (this.yesshift === "Shift Worker") ? this.yesshift : this.noshift,
                     }
                 },
                 "add_tags": [

@@ -33,10 +33,10 @@
 
 
 <body>
-    <section id="app" class="min-vh-100 bg-light">
+    <section id="app" class="min-vh-100 dark">
         <div class="container">
             <div class="row">
-                <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center p-5">
+                <div class="col-xl-6 col-lg-8 col-md-8 col-sm-10 mx-auto text-center p-5">
                     <!-- <i class="fas fa-toggle-on mb-2"></i> -->
 
                     <!-- <h1 class="text-white mb-5">Workers Make the Difference</h1> -->
@@ -65,13 +65,13 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-8">
+                                <div class="col-7">
 
                                     <label class="text-white">Email address <span>*</span>&nbsp;</label>
                                     <input type="email" placeholder="yourname@email.com" class="form-control mb-3"
                                         name="email" id="email" v-model="email" />
                                 </div>
-                                <div class="col-4">
+                                <div class="col-5">
 
                                     <label class="text-white">Post Code <span>*</span>&nbsp;</label>
                                     <input type="text" placeholder="2204" class="form-control mb-3" name="postcode"
@@ -84,10 +84,10 @@
                                     <label class="text-white">Are you a union member? <span>*</span>&nbsp;</label>
                                     <br>
                                     <div class="toggle">
-                                        <input v-model="yesunion" type="radio" name="sizeBy" value="yesunion"
+                                        <input v-model="yesunion" type="radio" name="union" value="Union Member"
                                             id="yesunion" checked />
                                         <label for="yesunion">Yes</label>
-                                        <input v-model="nounion" type="radio" name="sizeBy" value="nounion"
+                                        <input v-model="nounion" type="radio" name="union" value="Non Union Member"
                                             id="nounion" />
                                         <label for="nounion">No</label>
                                     </div>
@@ -115,10 +115,10 @@
 
 
                                     <div class="toggle2">
-                                        <input v-model="yesshift" type="radio" name="sizeBy" value="yesshift"
+                                        <input v-model="yesshift" type="radio" name="shift" value="Shift Worker"
                                             id="yesshift" checked="checked" />
                                         <label for="yesshift">Yes</label>
-                                        <input v-model="noshift" type="radio" name="sizeBy" value="noshift"
+                                        <input v-model="noshift" type="radio" name="shift" value="Not a Shift Worker"
                                             id="noshift" />
                                         <label for="noshift">No</label>
                                     </div>
@@ -144,18 +144,17 @@
                                 v-html="button_text"></button>
 
 
-                            <div class="mt-3" id="result"></div>
+                            <div class="mt-5" id="result"></div>
                             <div id="success"></div>
 
                         </form>
                         <div v-if="calculated == true">
-                            <div class="text-center col-md-12">
+                            <div class="text-center col-12">
                                 <h3 class="text-center text-white mt-3">
-                                    <br>
-                                    <span class="red">{{variables()}}</span>
-
+                                    Weeks annual of leave: <span class="red">{{annualleave()}} </span></br>
+                                    Days of personal leave: <span class="red">{{personalleave()}}</span> </br>
+                                    Weeks of long service leave: <span class="red">{{longservice()}} </span></br>
                                 </h3>
-
 
                             </div>
                         </div>
