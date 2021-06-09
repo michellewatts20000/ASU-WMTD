@@ -41,44 +41,102 @@
 
                     <!-- <h1 class="text-white mb-5">Workers Make the Difference</h1> -->
 
-                    <img class="logo mb-3" src="./assets/img/WMtD.png">
-                    <h4 class="text-white mb-5">How much portable leave are you owed?</h4>
+                    <img class="logo mb-4" src="./assets/img/WMtD.png">
+                    <h4 class="text-white mb-3">How much portable leave are you owed?</h4>
 
 
                     <div id="app">
 
                         <form v-on:submit.prevent="submitForm">
 
-                            <label class="text-white">Name <span>*</span>&nbsp;</label>
-                            <input type="text" placeholder="John Smith" class="form-control mb-3" name="name" id="name"
-                                v-model="name" />
+                            <div class="row">
+                                <div class="col">
 
-                            <label class="text-white">Phone <span>*</span>&nbsp;</label>
-                            <input type="number" placeholder="0452213234" class="form-control mb-3" name="phone"
-                                id="phone" v-model="phone" />
-
-                            <label class="text-white">Email address <span>*</span>&nbsp;</label>
-                            <input type="email" placeholder="yourname@email.com" class="form-control mb-3"
-                                name="email_address" id="email" v-model="email" />
-
-
-
-
-                            <label class="text-white">Are you a union member? <span>*</span>&nbsp;</label>
-                            <br>
-                            <div class="toggle">
-                                <div class="form-check form-check-inline">
-                                    <input v-model="yesunion" class="form-check-input" type="radio"
-                                        name="inlineRadioOptions" checked="checked" id="inlineRadio1" value="yesunion">
-                                    <label class="text-white form-check-label" for="inlineRadio1">Yes</label>
+                                    <label class="text-white">Name <span>*</span>&nbsp;</label>
+                                    <input type="text" placeholder="John Smith" class="form-control mb-3" name="name"
+                                        id="name" v-model="name" />
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input v-model="nounion" class="form-check-input" type="radio"
-                                        name="inlineRadioOptions" id="inlineRadio2" value="nounion">
-                                    <label class="text-white form-check-label" for="inlineRadio2">No</label>
+                                <div class="col">
+
+                                    <label class="text-white">Phone <span>*</span>&nbsp;</label>
+                                    <input type="number" placeholder="0452213234" class="form-control mb-3" name="phone"
+                                        id="phone" v-model="phone" />
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-8">
+
+                                    <label class="text-white">Email address <span>*</span>&nbsp;</label>
+                                    <input type="email" placeholder="yourname@email.com" class="form-control mb-3"
+                                        name="email" id="email" v-model="email" />
+                                </div>
+                                <div class="col-4">
+
+                                    <label class="text-white">Post Code <span>*</span>&nbsp;</label>
+                                    <input type="text" placeholder="2204" class="form-control mb-3" name="postcode"
+                                        id="postcode" v-model="postcode" />
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label class="text-white">Are you a union member? <span>*</span>&nbsp;</label>
+                                    <br>
+                                    <div class="toggle">
+                                        <input v-model="yesunion" type="radio" name="sizeBy" value="yesunion"
+                                            id="yesunion" checked />
+                                        <label for="yesunion">Yes</label>
+                                        <input v-model="nounion" type="radio" name="sizeBy" value="nounion"
+                                            id="nounion" />
+                                        <label for="nounion">No</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="text-white" for="industry">Industry: </label>
+                                    <select v-model="industry" class="form-control">
+                                        <option :value="this.selectedTemplate" disabled hidden>Community & disability
+                                            services</option>
+                                        <option v-for="industry_option in industry_options" :key="industry_option">
+                                            {{ industry_option }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label class="text-white">Are you a shift worker? <span>*</span>&nbsp;</label>
+                                    <br>
+
+
+                                    <div class="toggle2">
+                                        <input v-model="yesshift" type="radio" name="sizeBy" value="yesshift"
+                                            id="yesshift" checked="checked" />
+                                        <label for="yesshift">Yes</label>
+                                        <input v-model="noshift" type="radio" name="sizeBy" value="noshift"
+                                            id="noshift" />
+                                        <label for="noshift">No</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label class="text-white" for="year">Number of years in community /
+                                        disability services </label>
+                                    <select v-model="year" class="form-control">
+                                        <option :value="this.selectedTemplate" disabled hidden>5</option>
+                                        <option v-for="year_option in year_options" :key="year_option">
+                                            {{ year_option }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
 
 
 
@@ -92,14 +150,10 @@
                         </form>
                         <div v-if="calculated == true">
                             <div class="text-center col-md-12">
-                                <h3 class="text-center text-white mt-3">If you did this much overtime, every day, for
-                                    one
-                                    year you would have been underpaid:
+                                <h3 class="text-center text-white mt-3">
                                     <br>
-                                    <span
-                                        class="red">{{overtimeEachYear(startTime, finishTime, lunchOrNot, extraTime, dailySalary)}}</span>
+                                    <span class="red">{{variables()}}</span>
 
-                                    hours of overtime
                                 </h3>
 
 
