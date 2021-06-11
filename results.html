@@ -48,9 +48,10 @@
                     <div class="row">
                         <div id="data" class="col-lg-12">
                             <div v-for="quote in quotes">
-                                <div class="text-white">Total annual leave: {{ quote.annual }}</div>
-                                <div class="text-white">Total personal leave: {{ quote.personal}}</div>
-                                <div class="text-white">Total long service leave: {{ quote.long }}</div>
+                                <div id="annual" class="text-white">Total annual leave: {{ quote.annual }}</div>
+                                <div id="personal" class="text-white">Total personal leave: {{ quote.personal}}</div>
+                                <div id="long service" class="text-white">Total long service leave: {{ quote.long }}
+                                </div>
                             </div>
                         </div>
                     </div>
