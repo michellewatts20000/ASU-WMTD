@@ -37,126 +37,131 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 col-lg-8 col-md-8 col-sm-10 mx-auto text-center p-5">
-                    <!-- <i class="fas fa-toggle-on mb-2"></i> -->
 
-                    <!-- <h1 class="text-white mb-5">Workers Make the Difference</h1> -->
 
                     <img class="logo mb-4" src="./assets/img/WMtD.png">
-                    <h4 class="text-white mb-3">How much portable leave are you owed?</h4>
+                    <h4 class="text-white mb-3">How much leave are you owed?</h4>
 
 
-                    <div id="app">
 
-                        <form v-on:submit.prevent="submitForm">
 
-                            <div class="row">
-                                <div class="col">
+                    <form v-on:submit.prevent="submitForm">
 
-                                    <label class="text-white">Name <span>*</span>&nbsp;</label>
-                                    <input type="text" placeholder="John Smith" class="form-control mb-3" name="name"
-                                        id="name" v-model="name" />
-                                </div>
-                                <div class="col">
+                        <div class="row">
+                            <div class="col">
 
-                                    <label class="text-white">Phone <span>*</span>&nbsp;</label>
-                                    <input type="number" placeholder="0452213234" class="form-control mb-3" name="phone"
-                                        id="phone" v-model="phone" />
+                                <label class="text-white">Name <span>*</span>&nbsp;</label>
+                                <input type="text" placeholder="John Smith" class="form-control mb-3" name="name"
+                                    id="name" v-model="name" />
+                            </div>
+                            <div class="col">
+
+                                <label class="text-white">Phone <span>*</span>&nbsp;</label>
+                                <input type="number" placeholder="0452213234" class="form-control mb-3" name="phone"
+                                    id="phone" v-model="phone" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-7">
+
+                                <label class="text-white">Email address <span>*</span>&nbsp;</label>
+                                <input type="email" placeholder="yourname@email.com" class="form-control mb-3"
+                                    name="email" id="email" v-model="email" />
+                            </div>
+                            <div class="col-5">
+
+                                <label class="text-white">Post Code <span>*</span>&nbsp;</label>
+                                <input type="text" placeholder="2204" class="form-control mb-3" name="postcode"
+                                    id="postcode" v-model="postcode" />
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label class="text-white">Are you a union member? <span>*</span>&nbsp;</label>
+                                <br>
+                                <div class="toggle">
+                                    <input v-model="yesunion" type="radio" name="union" value="Union Member"
+                                        id="yesunion" checked />
+                                    <label for="yesunion">Yes</label>
+                                    <input v-model="nounion" type="radio" name="union" value="Non Union Member"
+                                        id="nounion" />
+                                    <label for="nounion">No</label>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row">
-                                <div class="col-7">
 
-                                    <label class="text-white">Email address <span>*</span>&nbsp;</label>
-                                    <input type="email" placeholder="yourname@email.com" class="form-control mb-3"
-                                        name="email" id="email" v-model="email" />
-                                </div>
-                                <div class="col-5">
-
-                                    <label class="text-white">Post Code <span>*</span>&nbsp;</label>
-                                    <input type="text" placeholder="2204" class="form-control mb-3" name="postcode"
-                                        id="postcode" v-model="postcode" />
-
-                                </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="text-white" for="sector">Sector <span>*</span>&nbsp;</label>
+                                <select v-model="sector" class="form-control">
+                                    <option :value="this.selectedTemplate" disabled hidden>Community sector</option>
+                                    <option v-for="sector_option in sector_options" :key="sector_option">
+                                        {{ sector_option }}
+                                    </option>
+                                </select>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label class="text-white">Are you a union member? <span>*</span>&nbsp;</label>
-                                    <br>
-                                    <div class="toggle">
-                                        <input v-model="yesunion" type="radio" name="union" value="Union Member"
-                                            id="yesunion" checked />
-                                        <label for="yesunion">Yes</label>
-                                        <input v-model="nounion" type="radio" name="union" value="Non Union Member"
-                                            id="nounion" />
-                                        <label for="nounion">No</label>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="col">
 
+                                <label class="text-white">Employer</label>
+                                <input type="text" placeholder="Employer" class="form-control mb-3" name="employer"
+                                    id="employer" v-model="employer" />
 
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label class="text-white" for="industry">Industry: </label>
-                                    <select v-model="industry" class="form-control">
-                                        <option :value="this.selectedTemplate" disabled hidden>Community & disability
-                                            services</option>
-                                        <option v-for="industry_option in industry_options" :key="industry_option">
-                                            {{ industry_option }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <label class="text-white">Are you a shift worker? <span>*</span>&nbsp;</label>
-                                    <br>
-
-
-                                    <div class="toggle2">
-                                        <input v-model="yesshift" type="radio" name="shift" value="Shift Worker"
-                                            id="yesshift" checked="checked" />
-                                        <label for="yesshift">Yes</label>
-                                        <input v-model="noshift" type="radio" name="shift" value="Not a Shift Worker"
-                                            id="noshift" />
-                                        <label for="noshift">No</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label class="text-white" for="year">Number of years in community /
-                                        disability services </label>
-                                    <select v-model="year" class="form-control">
-                                        <option :value="this.selectedTemplate" disabled hidden>5</option>
-                                        <option v-for="year_option in year_options" :key="year_option">
-                                            {{ year_option }}
-                                        </option>
-                                    </select>
-                                </div>
                             </div>
 
 
+                        </div>
 
-                            <button type="submit" id="custom_submit" value="Submit" class="btn btn-danger mt-3"
-                                v-html="button_text"></button>
+                        <div class="row">
+                            <div class="col">
+                                <label class="text-white">Are you a shift worker? <span>*</span>&nbsp;</label>
+                                <br>
 
 
-                            <div class="mt-5" id="result"></div>
-                            <div id="success"></div>
-
-                        </form>
-                        <div v-if="calculated == true">
-                            <div class="text-center col-12">
-                                <h3 class="text-center text-white mt-3">
-                                    Weeks annual of leave: <span class="red">{{annualleave()}} </span></br>
-                                    Days of personal leave: <span class="red">{{personalleave()}}</span> </br>
-                                    Weeks of long service leave: <span class="red">{{longservice()}} </span></br>
-                                </h3>
-
+                                <div class="toggle2">
+                                    <input v-model="yesshift" type="radio" name="shift" value="Shift Worker"
+                                        id="yesshift" checked="checked" />
+                                    <label for="yesshift">Yes</label>
+                                    <input v-model="noshift" type="radio" name="shift" value="Not a Shift Worker"
+                                        id="noshift" />
+                                    <label for="noshift">No</label>
+                                </div>
                             </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="text-white" for="year">Number of years in community /
+                                    disability services </label>
+                                <select v-model="year" class="form-control">
+                                    <option :value="this.selectedTemplate" disabled hidden>5</option>
+                                    <option v-for="year_option in year_options" :key="year_option">
+                                        {{ year_option }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <button type="submit" id="custom_submit" value="Submit" class="btn btn-danger mt-3"
+                            v-html="button_text"></button>
+
+
+                        <div class="mt-5" id="result"></div>
+                        <div id="success"></div>
+
+                    </form>
+                    <div v-if="calculated == true">
+                        <div class="text-center col-12">
+                            <h3 class="text-center text-white mt-3">
+                                Days of personal leave: <span class="red">{{personalLeave()}}</span> </br>
+                                Weeks annual of leave: <span class="red">{{annualLeave()}} </span></br>
+                                Weeks of long service leave: <span class="red">{{longService()}} </span></br>
+                            </h3>
+
                         </div>
                     </div>
 
@@ -164,9 +169,14 @@
 
 
 
+
                 </div>
                 <div id="footer" class="text-center col-md-12 mb-5">
-                    <h5 class="text-center mt-5">* Discliamer here
+                    <h5 class="text-center mt-5">* This is intended as a guide for NSW workers on the SCHADS Award only.
+                        Speak with your Union to find out your individual entitlements. Casual workers don’t accrue
+                        personal leave or annual leave – but are entitled to long service leave. Joining your union is
+                        the best prevention to unpaid entitlements. Authorised by Natalie Lang, Australian Services
+                        Union NSW & ACT (Services Branch).
                     </h5>
                 </div>
 

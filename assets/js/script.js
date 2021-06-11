@@ -10,12 +10,14 @@ var app = new Vue({
         email: '',
         phone: '',
         postcode: '',
+        employer: '',
         yesunion: '',
         nounion: '',
-        industry: 'Community & disability services',
+        sector: 'Community sector',
         year: '5',
         yesshift: '',
         noshift: '',
+        annualLeaveRes: '',
         button_text: 'Submit',
         calculated: false,
         dollar_options: {
@@ -23,27 +25,19 @@ var app = new Vue({
             numeral: true,
             numeralThousandsGroupStyle: 'thousand'
         },
-        industry_options: [
-            'Administration & professional services',
-            'Agriculture, forestry & fishing',
-            'Community & disability services',
-            'Construction',
-            'Education',
-            'Entertainment, arts & recreation',
-            'Finance, banking & insurance',
-            'Health',
+        sector_options: [
+            'Community sector',
+            'Disability sector',
+            'Child protection, youth and family services',
+            'Women’s Services',
+            'Community and Neighbourhood Centres',
+            'Migrant and settlement services',
+            'Policy and Advocacy',
+            'Housing and homelessness',
             'Hospitality, tourism & food services',
-            'Manufacturing',
-            'Media & Communication',
-            'Mining',
-            'Property & other services',
-            'Public services & Emergency Services ',
-            'Retail',
-            'Trades & trades assistants',
-            'Transport',
-            'Utilities',
-            'Warehousing & logistics',
-            'Something else. None of above fit what I do'
+            'Mental Health',
+            'Not For Profit',
+            'Other'
         ],
         year_options: [
             '1',
@@ -66,7 +60,36 @@ var app = new Vue({
             '18',
             '19',
             '20',
-            '21'
+            '21',
+            '22',
+            '23',
+            '24',
+            '25',
+            '26',
+            '27',
+            '28',
+            '29',
+            '30',
+            '31',
+            '32',
+            '33',
+            '34',
+            '35',
+            '36',
+            '37',
+            '38',
+            '39',
+            '40',
+            '41',
+            '42',
+            '43',
+            '44',
+            '45',
+            '46',
+            '47',
+            '48',
+            '49',
+            '50'
         ]
     },
 
@@ -78,30 +101,24 @@ var app = new Vue({
 
         },
 
-        annualleave: function () {
+        annualLeave: function () {
             if (this.yesshift === "Shift Worker") {
-                weeksAnnualLeave = this.year * 5;
+                annualLeaveRes = (this.year * 4) + 1;
             } else {
-                weeksAnnualLeave = this.year * 4;
-                personalLeave = this.year * 10;
-                longService = this.year * 0.8;
+                annualLeaveRes = this.year * 4;
             }
-            return weeksAnnualLeave
+            return annualLeaveRes
         },
 
-        personalleave: function () {
-            personalLeave = this.year * 10;
-            return personalLeave
+        personalLeave: function () {
+            personalLeaveRes = this.year * 10;
+            return personalLeaveRes
         },
 
-        longservice: function () {
-            longService = this.year * 0.8;
-            return longService.toFixed(2)
+        longService: function () {
+            longServiceRes = (this.year * 0.8).toFixed(2);
+            return longServiceRes
         },
-
-
-
-
 
         submitForm: function () {
             //show loading animation
@@ -123,9 +140,13 @@ var app = new Vue({
                         "number": "+61" + this.phone
                     }],
                     "custom_fields": {
-                        "Industry": this.industry,
+                        "Sector": this.sector,
                         "Union Membership Status": (this.yesunion === "Union Member") ? this.yesunion : this.nounion,
                         "Shift Worker": (this.yesshift === "Shift Worker") ? this.yesshift : this.noshift,
+                        "Employer": this.employer,
+                        // "Annual Leave": annualLeaveRes,
+                        // "Personal Leave": personalLeave(),
+                        // "Long Service Leave": longService()
                     }
                 },
                 "add_tags": [
